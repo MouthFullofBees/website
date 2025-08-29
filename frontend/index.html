@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>My Blog</h1>
+  <div id="blog-list"></div>
+
+  <script>
+    async function fetchBlogs() {
+      try {
+        const res = await fetch("http://localhost:1337/api/blogs?populate=*");
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        const data = await res.json();
+        console.log("API response:", data);
+
+        const blogList = document.getElementById("blog-list");
+
+        if (!data.data || data.data.length === 0) {
+          blogList.innerHTML = "<p>No blog posts yet.</p>";
+          return;
+        }
+
+        data.data.forEach(blog => {
+          const div = document.createElement("div");
+          div.className = "blog-card";
+
+          // Access Title, slug, content directly
+          const title = blog.Title || "Untitled";
+          const slug = blog.slug || `post-${blog.id}`;
+
+          // Get first paragraph text if available
+          let preview = "";
+          if (blog.content && blog.content.length > 0) {
+            const firstBlock = blog.content[0];
+            if (firstBlock.children && firstBlock.children.length > 0) {
+              preview = firstBlock.children[0].text;
+            }
+          }
+
+          div.innerHTML = `
+            <h2><a href="post.html?id=${blog.id}">${title}</a></h2>
+            <p>${preview.substring(0, 100)}...</p>
+          `;
+          blogList.appendChild(div);
+        });
+      } catch (err) {
+        console.error("Error loading blogs:", err);
+        document.getElementById("blog-list").innerHTML =
+          "<p style='color:red'>Could not load blog posts. Check console.</p>";
+      }
+    }
+
+    fetchBlogs();
+  </script>
+</body>
+</html>

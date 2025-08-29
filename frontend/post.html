@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Post</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="post"></div>
+
+  <script>
+    async function fetchPost() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      if (!id) {
+        document.getElementById("post").innerHTML = "<p>No post selected.</p>";
+        return;
+      }
+
+      try {
+        // ✅ use filter instead of /:id
+        const res = await fetch(`http://localhost:1337/api/blogs?filters[id][$eq]=${id}&populate=*`);
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        const data = await res.json();
+        console.log("API post response:", data);
+
+        const blog = data.data[0]; // first matching post
+        if (!blog) {
+          document.getElementById("post").innerHTML = "<p>Post not found.</p>";
+          return;
+        }
+
+        let contentHTML = "";
+        if (blog.content && blog.content.length > 0) {
+          blog.content.forEach(block => {
+            if (block.type === "paragraph") {
+              block.children.forEach(child => {
+                contentHTML += `<p>${child.text}</p>`;
+              });
+            }
+          });
+        }
+
+        document.getElementById("post").innerHTML = `
+          <h1>${blog.Title}</h1>
+          ${contentHTML}
+        `;
+      } catch (err) {
+        console.error("Error loading post:", err);
+        document.getElementById("post").innerHTML =
+          "<p style='color:red'>Could not load post. Check console.</p>";
+      }
+    }
+
+    fetchPost();
+  </script>
+</body>
+</html>
