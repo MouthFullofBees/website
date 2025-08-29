@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guestbook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='GuestbookStyle.css') }}">
+</head>
+
+
+
+<body>
+
+<div class="guestbook-wrapper">
+    <div class="guestbook-left">
+        <div class="container">
+
+            <div class="guestbook-break-top">
+                <h1>✽ ✽ ✽</h1>
+            </div>
+
+            <div class="Guestbook-Messages">
+                <h3 class="messages-header">messages...</h3>
+
+                {% if messages %}
+                    {% for msg in messages|reverse %}
+                        <div class="message">
+                            <div class="content">{{ msg.message|safe }}</div>
+                            <div class="meta">
+                                {% if msg.contact %}
+                                    {% if '@' in msg.contact %}
+                                        <a href="mailto:{{ msg.contact }}" class="highlight">{{ msg.name }}</a>
+                                    {% else %}
+                                        <a href="{{ msg.contact }}" target="_blank" class="highlight">{{ msg.name }}</a>
+                                    {% endif %}
+                                {% else %}
+                                    {{ msg.name }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="messages-subheader">No messages just yet, feel like planting the flag?</div>
+                {% endif %}
+
+                <!-- Scroll to top button inside messages container -->
+                <div class="scroll-top-container">
+                    <button class="scroll-top-btn" id="scrollMessagesTop">Take me up</button>
+                </div>
+            </div>
+
+            <div class="guestbook-break-bottom">
+                <h1>✽ ✽ ✽</h1>
+            </div>
+        
+        </div>
+    </div> 
+
+    <!--
+    <div class="guestbook-middle">
+        <div class="container">
+        </div>
+    </div>
+    -->
+
+    <div class="guestbook-right">
+        <div class="container">
+
+            <div class="Leave-page">
+                <!-- Container 2: Back to Main Page + Scroll to Top -->
+                <div class="back-top-container">
+                    <a href="{{ url_for('mainpage') }}">
+                        <button class="back-main-btn">Take me back</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-preamble"> 
+                <div class="title">
+                    Guestbook
+                </div>
+                <div class="main-body">
+                    Like the good old days of the web, this site now has a guestbook       
+                </div>
+
+            <div class="guestbook-Sign">
+                <form method="POST" action="{{ url_for('guestbook') }}" id="guestbook-form">
+                    <!-- NAME -->
+
+                    <div class="form-name"> 
+                        <h2><label for="name">Displayed Name:</label></h2>
+                        <small>This is the name that's going to be displayed on the site. You can send an anonymous message if you want, just leave this field empty.</small>
+                        <input type="text" id="name" name="name" placeholder="Jun'ichirō Tanizaki" value="{{ prev_name | default('') }}">
+                    </div> 
+
+                    <div class="form-link"> 
+                        <!-- WEBSITE / EMAIL -->
+                        <h2><label for="contact">Website or Email:</label></h2>
+                        <small>Either an email address or a website URL. It's going to be linked to the Displayed Name, if you decided to fill that field.</small>
+                        <input type="text" id="contact" name="contact" placeholder="https://theforest.io" value="{{ prev_contact | default('') }}">
+                    </div> 
+
+                    <div class="form-message"> 
+                        <!-- MESSAGE -->
+                        <h2><label for="message">Message:</label></h2>
+                        <small>The part that really matters, your message. You can write as much as you want but honestly, if you plan to write a 5000 words guestbook entry you should probably write a blog post on your site and then send me a link.</small>
+                        <textarea class="signmessage" id="message" name="message" placeholder="Some markdown is allowed. To style your message you can use *Italic*, **Bold**, [links](https://link.com), and ![Alt-text](https://example.com/image.jpg)" required>{{ prev_message | default('') }}</textarea>
+                    </div> 
+
+                    <div class="form-bot"> 
+
+                        <!-- BOT PREVENTION -->
+                        <h2><label for="botcheck">Bot Prevention:</label></h2>
+                        <small>I'm sorry I have to make you do this but this is the web we live in right now and I have to prevent at least some spam from flooding my site. To submit can you type the main title of this page? It should be 9 letters long. Lower or upper case, it doesn't matter.</small>
+                        <input type="text" id="botcheck" name="botcheck" placeholder="Guestbo.." value="{{ prev_botcheck | default('') }}" required>
+                        
+
+                        <div class="BotCheckSignBox"> 
+                            <div class="BotCheckSignBoxRight">
+                                <div class="flash"></div>
+
+                                    {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                let flashBox = document.querySelector(".flash");
+                                                flashBox.innerHTML = `{% for msg in messages %}{{ msg }}<br>{% endfor %}`;
+                                                flashBox.style.display = "block";
+                                            });
+                                        </script>
+                                    {% endif %}
+                                    {% endwith %}
+                            </div>
+                            
+                            <div class="BotCheckSignBoxLeft">
+                                <button class="sign-btn" type="submit">Sign the guestbook</button>
+                            </div>
+                        </div>
+                    </div> 
+
+
+
+
+                    
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="{{ url_for('static', filename='guestbook.js') }}"></script>
+</body>
+
+
+
+</html>

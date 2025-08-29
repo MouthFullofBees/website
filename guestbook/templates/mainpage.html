@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to My Website</h1>
+    <p>This is the main page. You can navigate to the guestbook below:</p>
+
+    <a href="{{ url_for('guestbook') }}">
+        <button>Go to Guestbook</button>
+    </a>
+
+    <a href="{{ url_for('blog') }}">
+        <button>Go to Blog</button>
+    </a>
+
+ 
+
+    <div style="margin-top: 50px;">
+        <p>Other links or content can go here.</p>
+    </div>
+</div>
+
+</body>
+</html>

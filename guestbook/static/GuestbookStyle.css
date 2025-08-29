@@ -1,0 +1,435 @@
+
+/* Body containers */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+.guestbook-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    gap: 40px;
+}
+.container {
+    margin: auto;
+    height: 92%;
+}
+
+/* Divide guestbook wrapper into two segments, left (scroll), right (form) */
+.guestbook-left {
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+.guestbook-left .container {
+    display: inherit;
+    width: 800px;
+    
+}
+.Guestbook-Messages {
+    width: 800px;
+
+    overflow-y: auto;    
+    background-color: transparent;
+    z-index: 0;          
+    padding-top: 70px;
+    padding-bottom: 155px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+.Guestbook-Messages::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and most WebKit browsers */
+}
+
+/* Left side scroll function */
+.guestbook-break-bottom, .guestbook-break-top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 150px;
+    display: flex;
+    z-index: 2;         
+    color: #424242;
+}
+.guestbook-break-top {
+    align-self: flex-start;
+    justify-content: center;
+}
+.guestbook-break-bottom {
+    align-self: flex-end;
+    justify-content: center;
+}
+.guestbook-break-top::before, .guestbook-break-bottom::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top:0; bottom:0; left:0; right:0 */
+    z-index: 1;
+}
+.guestbook-break-top::before {
+    background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+.guestbook-break-bottom::before {
+    background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+/* left side stars (top and bottom) */
+.guestbook-break-top h1 {
+    z-index: 3;
+    color: #d0d0d0;
+    margin-top: -10px;
+}
+.guestbook-break-bottom h1 {
+    z-index: 3;
+    color: #d0d0d0;
+    margin-top: 110px;
+}
+
+
+/* left side scroll text ("messages..") */
+.messages-header {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: system-ui, sans-serif;
+    font-size: 1.6rem;
+    color: rgb(71, 71, 71);
+    font-style: normal;
+    font-weight: 400;
+}
+.messages-subheader {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: system-ui, sans-serif;
+    font-size: 1.2rem;
+    color: rgb(71, 71, 71);
+    font-style: normal;
+    font-weight: 400;
+}
+.scroll-top-container {
+    text-align: center;
+    position: sticky;
+    margin-top: 10px; 
+}
+
+
+
+
+
+
+
+.guestbook-right {
+    display: flex;
+    height: 100vh;
+}
+.guestbook-right .container {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    background-color: #ffbbf9;
+}
+.Leave-page {
+    display: inherit;
+    background: transparent;
+    margin-top: 2px;
+}
+
+
+.form-preamble {
+    font-family: "Iowan Old Style", Iowan, "Iowan BT", "Palatino Linotype", "URW Palladio L", P052, serif;
+    font-style: normal;
+    line-height: 1.75;
+    word-wrap: break-word;
+    color: #424242;       /* ensure it’s a block element */
+}
+.title {
+    background-color: #2196F3;
+    font-size: 2.3rem; 
+    font-weight: 500;
+}
+.main-body {
+    background-color: #c02424;
+    font-size: 1.1rem; 
+    font-weight: 500;
+}
+
+
+.form-preamble {
+    display: inherit;
+    flex-direction: inherit;
+    background: #dbb81c;
+}
+.guestbook-Sign {
+    display: inherit;
+    background: rgb(0, 17, 255);
+    padding: 2px;
+}
+
+form {
+    display: inherit;
+    flex-direction: column;
+    background: #ffdddd;
+}
+
+
+
+
+
+
+
+
+
+.form-name {
+    display: flex;
+    flex-direction: column;
+    background: #b51cdb;
+}
+
+.form-link {
+    display: flex;
+    flex-direction: column;
+    background: #7edb14;
+}
+
+.form-message {
+    display: flex;
+    flex-direction: column;
+    background: #db0f0f;
+}
+
+.signmessage {
+    height: 100px;        /* Set the fixed height you want */
+    resize: none;         /* Prevent user from resizing the box */
+    overflow-y: auto;
+    font-size: 1em;     /* Add vertical scroll if content is too long */
+}
+
+.form-bot {
+    height: 245px;
+    display: flex;
+    flex-direction: column;
+    background: #d89e9e;
+}
+
+.BotCheckSignBox {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #c02424;
+}
+
+.BotCheckSignBoxLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    display: flex;
+    background: #14052e;
+}
+
+.BotCheckSignBoxRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    display: flex;
+    background: #02660a;
+}
+
+
+
+
+
+
+
+
+.scroll-top-btn {
+    display: none;
+    padding: 15px 60px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+    font-size: 1.2rem;
+    color: rgb(71, 71, 71);
+    font-style: normal;
+    font-weight: 400;
+    transition: 0.2s;
+}
+.scroll-top-btn:hover {
+    border: 1px solid rgb(71, 71, 71);
+}
+.back-main-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+    font-size: 1.1rem;
+    color: rgb(71, 71, 71);
+    font-style: normal;
+    font-weight: 400;
+    transition: 0.1s;
+}
+.back-main-btn:hover {
+    font-style:oblique;
+    margin-left: 3px;
+}
+
+
+.sign-btn {
+    background-color: #2196F3;
+    color: white;
+}
+.sign-btn:hover {
+    background-color: #1976D2;
+}
+
+
+
+
+
+
+
+input, textarea {
+    margin-bottom: 10px;
+    background-color: #d4b3e7;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid;
+    border-color: #540f7c;
+    outline: none;
+}
+
+
+
+
+
+
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* meta stays at bottom */
+    padding: 10px;
+    margin-bottom: 60px;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.message img {
+    max-width: 100%;    /* Image will not exceed the container width */
+    height: auto;       /* Maintains aspect ratio */
+    display: block;     /* Removes inline spacing issues */
+    margin: 10px 0;     /* Optional spacing above and below */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.content {
+    background-color:#ffffff00;
+    font-family: "Iowan Old Style", Iowan, "Iowan BT", "Palatino Linotype", "URW Palladio L", P052, serif;
+    font-size: 1.4rem; 
+    font-weight: 500;
+    font-style: italic;
+    text-align: left;
+    line-height: 1.75;
+    word-wrap: break-word;
+    padding: 27px;
+    display: block;  
+    color: #424242;       /* ensure it’s a block element */
+    white-space: pre-wrap;
+
+}
+.content p {
+    margin: 0;      
+}
+
+/* Apply highlight styles to all links inside messages content */
+.content a {
+    display: inline-block; 
+    text-decoration: none; /* removes underline */
+    background: linear-gradient(
+        to top,
+        #fff7b1 70%,
+        transparent 50%
+    );
+    background-size: 100% 0.75em; /* control highlight height */
+    background-repeat: no-repeat;
+    background-position: 0 0.72em; /* shift downward */
+    cursor: pointer;
+    transition: 1s ease;
+}
+.content a:hover {
+    background: linear-gradient(
+        to top,
+        #fff278 70%, /* deeper yellow */
+        transparent 50%
+    );
+    background-size: 100% 0.8em;
+    background-repeat: no-repeat;
+    background-position: 0 0.52em;
+}
+
+
+
+
+.meta {
+    align-self: flex-end; 
+    margin: 15px 20px;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    color: #424242;
+    font-style: normal;
+    font-weight: 400;
+}
+.highlight {
+    display: inline-block; 
+    text-decoration: none; /* removes underline */
+    background: linear-gradient(
+        to top,
+        #fff7b1 70%,
+        transparent 50%
+    );
+    background-size: 100% 0.8em; /* control highlight height */
+    background-repeat: no-repeat;
+    background-position: 0 0.52em; /* shift downward */
+    cursor: pointer;
+    transition: 1s ease;
+}
+.highlight:hover {
+    background: linear-gradient(
+        to top,
+        #fff278 70%, /* deeper yellow */
+        transparent 50%
+    );
+    background-size: 100% 0.8em;
+    background-repeat: no-repeat;
+    background-position: 0 0.52em;
+ 
+}
+.highlight,
+.highlight:link,
+.highlight:visited {
+    color: #424242; /* your desired text color */
+    text-decoration: none; /* no underline */
+}
+.highlight:active {
+    color: #424242; /* stays the same when clicked */
+}
+
+.flash {
+    display: none;
+    background: #64ff56;
+    border: 2px solid red;
+    padding: 10px 10px;        /* More comfortable padding */
+    color: #000;
+    text-align: center;         /* Centers text horizontally */
+    margin: 10px auto;          /* Adds spacing and centers the box */
+    max-width: 100%;            /* Prevents overflow */
+    box-sizing: border-box;     /* Includes padding in width */
+}
+
+

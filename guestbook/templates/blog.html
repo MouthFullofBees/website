@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='blogstyle.css') }}">
+    <script src="{{ url_for('static', filename='blog.js') }}" defer></script>
+</head>
+<body>
+<div class="blog-container">
+    <!-- LEFT COLUMN -->
+    <div class="blog-list">
+        {% for post in posts %}
+        <div class="blog-entry" data-title="{{ post.title }}" data-content="{{ post.content }}">
+            <span class="blog-date">{{ post.date }}{% if post.date|int in [1,21,31] %}st{% elif post.date|int in [2,22] %}nd{% elif post.date|int in [3,23] %}rd{% else %}th{% endif %}</span>
+            <span class="blog-title">{{ post.title }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="blog-content">
+        <div class="preamble">
+            <h2>Welcome to My Blog</h2>
+            <p>Here you’ll find posts about my journey, projects, and thoughts. Click on a post to read it!</p>
+        </div>
+        <div class="post-display hidden"></div>
+    </div>
+</div>
+</body>
+</html>

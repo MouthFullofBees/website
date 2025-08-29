@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.blog-container {
+    display: flex;
+    height: 100vh;
+}
+
+.blog-list {
+    width: 35%;
+    background: #f9f9f9;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+
+
+
+.blog-entry {
+    padding: 0.8rem;
+    margin-bottom: 0rem;
+    cursor: pointer;
+    background-color: aquamarine;
+
+    /* Transition applies to all color and margin changes */
+    transition: margin-left 0.2s, color 0.2s;
+}
+
+
+.blog-date {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.blog-title {
+    font-size: 1rem;
+}
+
+.blog-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+/* Hover cascading color effect */
+.blog-entry:hover,
+.blog-entry.hover-main {
+    margin-left: 3rem;
+    color: blue;
+}
+
+.blog-entry.hover-neighbor {
+    margin-left: 2rem;
+    color: green;
+}
+
+.blog-entry.hover-neighbor-2 {
+    margin-left: 1rem;
+    color: red;
+}

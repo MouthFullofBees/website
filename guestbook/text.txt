@@ -1,0 +1,41 @@
+Installed node.js
+
+then in dev folder:
+npx create-strapi-app@latest my-blog-backend --quickstart
+
+installed to the 'blogpost' folder (must be run on an empty folder)
+
+runs admin server at 
+http://localhost:1337/admin
+
+Admin account:
+deerdeepblue@gmail.com
+WarmJazzBees!!01
+
+
+
+
+By default Strapi protects APIs.
+
+Go to Settings → Roles → Public
+
+Under Permissions, enable:
+
+find (list all blogs)
+
+findOne (get single blog by slug/id)
+
+Save.
+
+Now you can access blogs at:
+
+http://localhost:1337/api/blogs → list all
+
+http://localhost:1337/api/blogs/1 → single blog
+
+
+
+
+✅ Restart Strapi (Admin + API)
+
+Open a terminal and go to your Strapi project folder (the one created after you pressed Skip):
